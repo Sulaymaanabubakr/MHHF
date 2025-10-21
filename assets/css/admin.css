@@ -125,6 +125,18 @@
   box-shadow: 0 10px 25px rgba(20, 51, 94, 0.15);
 }
 
+.admin-footer {
+  width: 100%;
+  margin-top: auto;
+}
+
+.admin-footer .footer__inner {
+  width: min(100%, 960px);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 3vw, 1.6rem);
+  box-sizing: border-box;
+}
+
 .admin-footer--compact {
   padding-top: 2rem;
 }
@@ -133,7 +145,6 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  width: 100%;
   align-items: center;
   text-align: center;
 }
@@ -583,6 +594,8 @@
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 1.5rem;
+    text-align: left;
+    align-items: flex-start;
   }
 
   .media-item {
