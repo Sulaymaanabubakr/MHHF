@@ -37,6 +37,7 @@ const db = getFirestore(app);
 
 const authPanel = document.querySelector('[data-auth-panel]');
 const dashboard = document.querySelector('[data-dashboard]');
+const authOnlyElements = document.querySelectorAll('[data-requires-auth]');
 const adminName = document.querySelector('[data-admin-name]');
 const emailLoginForm = document.querySelector('[data-email-login]');
 const googleLoginBtn = document.querySelector('[data-google-login]');
@@ -79,13 +80,12 @@ function showToast(message, variant = 'default') {
 
 function toggleView(isAuthenticated) {
   if (!authPanel || !dashboard) return;
-  if (isAuthenticated) {
-    authPanel.setAttribute('hidden', '');
-    dashboard.removeAttribute('hidden');
-  } else {
-    dashboard.setAttribute('hidden', '');
-    authPanel.removeAttribute('hidden');
-  }
+  document.body?.classList.toggle('is-authenticated', isAuthenticated);
+  authPanel.toggleAttribute('hidden', isAuthenticated);
+  dashboard.toggleAttribute('hidden', !isAuthenticated);
+  authOnlyElements.forEach((element) => {
+    element.toggleAttribute('hidden', !isAuthenticated);
+  });
 }
 
 function clearPreviews() {
