@@ -60,6 +60,28 @@ const formatter = new Intl.DateTimeFormat('en-NG', {
   timeStyle: 'short',
 });
 
+function formatAdminName(user) {
+  if (!user) return 'Administrator';
+  const displayName = user.displayName?.trim();
+  if (displayName) {
+    return displayName;
+  }
+  const email = user.email?.trim();
+  if (email) {
+    const localPart = email.split('@')[0] || '';
+    if (localPart) {
+      const friendly = localPart
+        .replace(/[\.\-_]+/g, ' ')
+        .replace(/\b\w/g, (char) => char.toUpperCase())
+        .trim();
+      if (friendly) {
+        return friendly;
+      }
+    }
+  }
+  return 'Administrator';
+}
+
 function showToast(message, variant = 'default') {
   if (!toast) return;
   toast.textContent = message;
@@ -520,7 +542,7 @@ onAuthStateChanged(auth, (user) => {
   }
   toggleView(!!user);
   if (user && adminName) {
-    adminName.textContent = user.displayName || user.email || 'Administrator';
+    adminName.textContent = formatAdminName(user);
     subscribeToMedia();
   } else {
     adminName.textContent = 'Administrator';
