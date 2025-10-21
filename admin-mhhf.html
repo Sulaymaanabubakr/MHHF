@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MHHF Media Admin</title>
-    <meta name="title" content="Muslims Helping Humanity Foundation (MHHF) – Empowering Widows, Orphans &amp; The Less Privileged" />
+    <meta name="title" content="Muslims Helping Humanity Foundation (MHHF) - Empowering Widows, Orphans &amp; The Less Privileged" />
     <meta name="description" content="Secure dashboard for Muslims Helping Humanity Foundation administrators to manage gallery and video content." />
     <meta property="og:title" content="MHHF Media Admin" />
     <meta property="og:description" content="Secure dashboard for Muslims Helping Humanity Foundation administrators to manage gallery and video content." />
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/admin.css" />
   </head>
-  <body class="admin-body">
+  <body class="admin-body admin-dashboard-page">
     <header class="admin-header" data-requires-auth hidden>
       <div class="admin-header__brand">
         <span class="brand__logo">M</span>
@@ -36,35 +36,7 @@
       </button>
     </header>
 
-    <main class="admin-main">
-      <section class="auth-panel" data-auth-panel>
-        <div class="admin-card auth-card">
-          <h1>Administrator Sign In</h1>
-          <p>Log in with your MHHF admin account to manage gallery and video content.</p>
-
-          <form data-email-login class="auth-form">
-            <div class="form-group">
-              <label for="adminEmail">Email</label>
-              <input type="email" id="adminEmail" name="email" placeholder="admin@example.com" required />
-            </div>
-            <div class="form-group">
-              <label for="adminPassword">Password</label>
-              <input type="password" id="adminPassword" name="password" placeholder="••••••••" required />
-            </div>
-            <button type="submit" class="btn btn--primary full-width">Sign In</button>
-          </form>
-
-          <div class="divider">
-            <span>or</span>
-          </div>
-
-          <button type="button" class="btn btn--outline full-width" data-google-login>
-            <i class="ri-google-fill"></i>
-            Continue with Google
-          </button>
-        </div>
-      </section>
-
+    <main class="admin-main admin-main--dashboard">
       <section class="dashboard" data-dashboard hidden>
         <div class="admin-greeting">
           <h1>Welcome back, <span data-admin-name>Administrator</span>!</h1>
@@ -197,7 +169,7 @@
               <span>Foundation</span>
             </span>
           </a>
-          <p>Muslims Helping Humanity Foundation (MHHF) — lifting lives with compassion, dignity, and hope.</p>
+          <p>Muslims Helping Humanity Foundation (MHHF) - lifting lives with compassion, dignity, and hope.</p>
         </div>
         <div class="footer__links">
           <h4>Quick Links</h4>
@@ -225,7 +197,7 @@
           </div>
         </div>
       </div>
-      <p class="footer__note">Muslims Helping Humanity Foundation © 2025. All Rights Reserved. Built with love to serve humanity.</p>
+      <p class="footer__note">Muslims Helping Humanity Foundation c 2025. All Rights Reserved. Built with love to serve humanity.</p>
     </footer>
 
     <script type="module" src="assets/js/admin.js"></script>

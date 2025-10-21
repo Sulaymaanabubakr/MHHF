@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MHHF Admin Login</title>
+    <meta name="description" content="Sign in to the Muslims Helping Humanity Foundation media dashboard to manage gallery and video content." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/admin.css" />
+  </head>
+  <body class="admin-body admin-login-page">
+    <main class="admin-main">
+      <section class="auth-panel" data-auth-panel>
+        <div class="admin-card auth-card">
+          <span class="brand__logo brand__logo--large">M</span>
+          <h1>MHHF Administrator Sign In</h1>
+          <p>Use your verified admin credentials to access the media dashboard.</p>
+
+          <form data-email-login class="auth-form">
+            <div class="form-group">
+              <label for="adminLoginEmail">Email</label>
+              <input type="email" id="adminLoginEmail" name="email" placeholder="admin@example.com" required />
+            </div>
+            <div class="form-group">
+              <label for="adminLoginPassword">Password</label>
+              <input type="password" id="adminLoginPassword" name="password" placeholder="********" required />
+            </div>
+            <button type="submit" class="btn btn--primary full-width" data-email-submit>Sign In</button>
+          </form>
+
+          <div class="divider">
+            <span>or</span>
+          </div>
+
+          <button type="button" class="btn btn--outline full-width" data-google-login>
+            <i class="ri-google-fill"></i>
+            Continue with Google
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <div class="admin-toast" data-admin-toast hidden></div>
+
+    <footer class="admin-footer admin-footer--compact">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <a href="index.html" class="brand">
+            <span class="brand__logo">M</span>
+            <span class="brand__text">
+              <span>Muslims Helping Humanity</span>
+              <span>Foundation</span>
+            </span>
+          </a>
+          <p>Muslims Helping Humanity Foundation (MHHF) - lifting lives with compassion, dignity, and hope.</p>
+        </div>
+        <div class="footer__contact">
+          <h4>Need Help?</h4>
+          <ul>
+            <li><i class="ri-mail-line"></i><a href="mailto:mhminitiative20@gmail.com">mhminitiative20@gmail.com</a></li>
+            <li><i class="ri-phone-line"></i><a href="tel:+2348108997871">08108997871</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer__note">Muslims Helping Humanity Foundation c 2025. All Rights Reserved.</p>
+    </footer>
+
+    <script type="module" src="assets/js/admin-login.js"></script>
+  </body>
+</html>

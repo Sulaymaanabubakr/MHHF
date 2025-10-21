@@ -3,6 +3,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 .admin-header {
@@ -69,6 +70,62 @@
   padding: 0 1.5rem;
   display: grid;
   gap: 2rem;
+}
+
+.admin-dashboard-page .admin-main--dashboard {
+  margin-top: 2rem;
+}
+
+.admin-login-page .admin-main {
+  flex: 1;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: clamp(2rem, 6vh, 4rem) 1.5rem 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-login-page .auth-panel {
+  min-height: auto;
+  width: 100%;
+}
+
+.admin-login-page .auth-card {
+  gap: 1.25rem;
+}
+
+.brand__logo--large {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 0.75rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-blue), var(--sunset-orange));
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.75rem;
+  box-shadow: 0 10px 25px rgba(20, 51, 94, 0.15);
+}
+
+.admin-footer--compact {
+  padding-top: 2rem;
+}
+
+.admin-footer--compact .footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: space-between;
+}
+
+.admin-footer--compact .footer__brand {
+  max-width: 360px;
+}
+
+.admin-footer--compact .footer__contact {
+  min-width: 200px;
 }
 
 .auth-panel {

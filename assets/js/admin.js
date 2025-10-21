@@ -1,12 +1,5 @@
 import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js';
-import {
-  getAuth,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-  signOut,
-} from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js';
+import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js';
 import {
   getFirestore,
   collection,
@@ -35,12 +28,9 @@ const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const authPanel = document.querySelector('[data-auth-panel]');
 const dashboard = document.querySelector('[data-dashboard]');
 const authOnlyElements = document.querySelectorAll('[data-requires-auth]');
 const adminName = document.querySelector('[data-admin-name]');
-const emailLoginForm = document.querySelector('[data-email-login]');
-const googleLoginBtn = document.querySelector('[data-google-login]');
 const logoutBtn = document.getElementById('logoutBtn');
 const tabs = document.querySelectorAll('.dashboard-tab');
 const sections = document.querySelectorAll('.dashboard-section');
@@ -79,13 +69,22 @@ function showToast(message, variant = 'default') {
 }
 
 function toggleView(isAuthenticated) {
-  if (!authPanel || !dashboard) return;
+  const authPanel = document.querySelector('[data-auth-panel]');
   document.body?.classList.toggle('is-authenticated', isAuthenticated);
-  authPanel.toggleAttribute('hidden', isAuthenticated);
-  dashboard.toggleAttribute('hidden', !isAuthenticated);
+
+  if (dashboard) {
+    dashboard.toggleAttribute('hidden', !isAuthenticated);
+  }
+
   authOnlyElements.forEach((element) => {
     element.toggleAttribute('hidden', !isAuthenticated);
   });
+
+  if (authPanel) {
+    authPanel.toggleAttribute('hidden', isAuthenticated);
+  } else if (!isAuthenticated && dashboard) {
+    window.location.replace('admin-login.html');
+  }
 }
 
 function clearPreviews() {
@@ -497,38 +496,6 @@ videoForm?.addEventListener('submit', async (event) => {
     if (videoUploadHint) {
       videoUploadHint.textContent = 'Choose an MP4, MOV, or WEBM file to upload.';
     }
-  }
-});
-
-emailLoginForm?.addEventListener('submit', async (event) => {
-  event.preventDefault();
-  if (!configReady) {
-    showToast('Firebase configuration is missing. Update the settings to continue.', 'error');
-    return;
-  }
-  const data = new FormData(emailLoginForm);
-  try {
-    await signInWithEmailAndPassword(auth, data.get('email'), data.get('password'));
-    showToast('Signed in successfully.');
-    emailLoginForm.reset();
-  } catch (error) {
-    console.error('Unable to sign in', error);
-    showToast('Sign-in failed. Please check your details.', 'error');
-  }
-});
-
-googleLoginBtn?.addEventListener('click', async () => {
-  if (!configReady) {
-    showToast('Firebase configuration is missing. Update the settings to continue.', 'error');
-    return;
-  }
-  try {
-    const provider = new GoogleAuthProvider();
-    await signInWithPopup(auth, provider);
-    showToast('Signed in with Google.');
-  } catch (error) {
-    console.error('Google sign-in failed', error);
-    showToast('Google sign-in was cancelled or failed.', 'error');
   }
 });
 
