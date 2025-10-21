@@ -57,6 +57,10 @@ const formatter = new Intl.DateTimeFormat('en-NG', {
   timeStyle: 'short',
 });
 
+function getUploadErrorMessage(kind) {
+  return `${kind} upload failed. Check your Cloudinary preset.`;
+}
+
 function showToast(message, variant = 'default') {
   if (!toast) return;
   toast.textContent = message;
@@ -120,7 +124,6 @@ async function uploadToCloudinary(file, folder, resourceType) {
   formData.append('file', file);
   formData.append('upload_preset', preset);
   formData.append('folder', folder);
-  formData.append('return_delete_token', '1');
 
   const response = await fetch(url, {
     method: 'POST',
@@ -446,22 +449,24 @@ imageForm?.addEventListener('submit', async (event) => {
   }
   try {
     const upload = await uploadToCloudinary(file, 'mhhf/images', 'image');
-    await addDoc(collection(db, 'media_images'), {
+    const payload = {
       title,
       description,
       imageUrl: upload.secure_url,
       publicId: upload.public_id,
-      deleteToken: upload.delete_token,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
-    });
+    };
+    if (upload.delete_token) {
+      payload.deleteToken = upload.delete_token;
+    }
+    await addDoc(collection(db, 'media_images'), payload);
     showToast('Image uploaded successfully.');
     imageForm.reset();
     clearPreviews();
   } catch (error) {
     console.error('Unable to upload image', error);
-    const message = error?.message ? `Image upload failed: ${error.message}` : 'Image upload failed. Please try again.';
-    showToast(message, 'error');
+    showToast(getUploadErrorMessage('Image'), 'error');
   }
 });
 
@@ -493,22 +498,24 @@ videoForm?.addEventListener('submit', async (event) => {
   }
   try {
     const upload = await uploadToCloudinary(file, 'mhhf/videos', 'video');
-    await addDoc(collection(db, 'media_videos'), {
+    const payload = {
       title,
       description,
       videoUrl: upload.secure_url,
       publicId: upload.public_id,
-      deleteToken: upload.delete_token,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
-    });
+    };
+    if (upload.delete_token) {
+      payload.deleteToken = upload.delete_token;
+    }
+    await addDoc(collection(db, 'media_videos'), payload);
     showToast('Video uploaded successfully.');
     videoForm.reset();
     clearPreviews();
   } catch (error) {
     console.error('Unable to upload video', error);
-    const message = error?.message ? `Video upload failed: ${error.message}` : 'Video upload failed. Please try again.';
-    showToast(message, 'error');
+    showToast(getUploadErrorMessage('Video'), 'error');
   } finally {
     if (videoUploadBtn) {
       videoUploadBtn.disabled = false;
