@@ -64,16 +64,17 @@
 
 .admin-main {
   flex: 1;
-  max-width: 1200px;
   width: 100%;
-  margin: 2rem auto 3rem;
-  padding: 0 1.5rem;
+  max-width: 100%;
+  margin: 1.5rem auto 3rem;
+  padding: 0 1rem;
   display: grid;
-  gap: 2rem;
+  gap: 1.5rem;
+  box-sizing: border-box;
 }
 
 .admin-dashboard-page .admin-main--dashboard {
-  margin-top: 2rem;
+  margin-top: clamp(1rem, 4vw, 2rem);
 }
 
 .admin-login-page .admin-main {
@@ -115,9 +116,9 @@
 
 .admin-footer--compact .footer__inner {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
 }
 
 .admin-footer--compact .footer__brand {
@@ -139,7 +140,7 @@
   background: #fff;
   border-radius: var(--radius-lg);
   box-shadow: 0 30px 60px rgba(20, 51, 94, 0.12);
-  padding: 2.25rem;
+  padding: 1.75rem;
   display: grid;
   gap: 1.5rem;
 }
@@ -267,26 +268,31 @@
 
 .dashboard {
   display: grid;
-  gap: 2rem;
+  gap: 1.5rem;
+  width: 100%;
 }
 
 .dashboard-tabs {
-  display: inline-flex;
+  display: flex;
+  width: 100%;
   padding: 0.35rem;
   background: rgba(29, 78, 137, 0.08);
   border-radius: 999px;
-  gap: 0.35rem;
-  width: max-content;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .dashboard-tab {
   border: none;
   background: transparent;
-  padding: 0.6rem 1.4rem;
+  padding: 0.6rem 1.2rem;
   border-radius: 999px;
   font-weight: 600;
   color: var(--primary-blue);
   cursor: pointer;
+  flex: 1 1 140px;
+  text-align: center;
 }
 
 .dashboard-tab.active {
@@ -334,8 +340,8 @@
 
 .media-item {
   display: grid;
-  grid-template-columns: 120px 1fr auto;
-  gap: 1.25rem;
+  grid-template-columns: 1fr;
+  gap: 1rem;
   padding: 1rem;
   border-radius: var(--radius-md);
   border: 1px solid rgba(20, 51, 94, 0.12);
@@ -346,7 +352,8 @@
 .media-item__preview img,
 .media-item__preview video {
   width: 100%;
-  height: 100px;
+  height: auto;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: var(--radius-md);
 }
@@ -374,7 +381,9 @@
 .media-item__actions {
   display: grid;
   gap: 0.5rem;
-  align-content: start;
+  grid-auto-flow: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .admin-toast {
@@ -463,37 +472,67 @@
   display: none;
 }
 
-@media (max-width: 900px) {
-  .media-item {
-    grid-template-columns: 1fr;
-  }
-
-  .media-item__preview {
-    order: -1;
-  }
-
-  .media-item__actions {
-    grid-auto-flow: column;
-    justify-content: flex-start;
-  }
-}
-
-@media (max-width: 640px) {
+@media (min-width: 640px) {
   .admin-main {
-    padding: 0 1rem;
-  }
-
-  .admin-card {
-    padding: 1.75rem;
+    padding: 0 1.5rem;
   }
 
   .dashboard-tabs {
-    width: 100%;
-    justify-content: space-between;
+    flex-wrap: nowrap;
+    max-width: 420px;
+    margin: 0 auto;
   }
 
   .dashboard-tab {
-    flex: 1;
-    text-align: center;
+    flex: 0 0 auto;
+  }
+
+  .admin-footer--compact .footer__inner {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .media-item {
+    grid-template-columns: 140px 1fr;
+    align-items: start;
+  }
+
+  .media-item__preview img,
+  .media-item__preview video {
+    height: 120px;
+    aspect-ratio: auto;
+  }
+
+  .media-item__actions {
+    grid-auto-flow: row;
+    justify-content: flex-end;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .admin-main {
+    max-width: 1200px;
+    gap: 2rem;
+    padding: 0 1.75rem;
+  }
+
+  .admin-card {
+    padding: 2.25rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .media-item {
+    grid-template-columns: 140px 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .media-item__actions {
+    align-content: start;
   }
 }
