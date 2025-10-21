@@ -460,7 +460,8 @@ imageForm?.addEventListener('submit', async (event) => {
     clearPreviews();
   } catch (error) {
     console.error('Unable to upload image', error);
-    showToast('Image upload failed. Please try again.', 'error');
+    const message = error?.message ? `Image upload failed: ${error.message}` : 'Image upload failed. Please try again.';
+    showToast(message, 'error');
   }
 });
 
@@ -506,7 +507,8 @@ videoForm?.addEventListener('submit', async (event) => {
     clearPreviews();
   } catch (error) {
     console.error('Unable to upload video', error);
-    showToast('Video upload failed. Please try again.', 'error');
+    const message = error?.message ? `Video upload failed: ${error.message}` : 'Video upload failed. Please try again.';
+    showToast(message, 'error');
   } finally {
     if (videoUploadBtn) {
       videoUploadBtn.disabled = false;
