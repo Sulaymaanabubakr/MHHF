@@ -30,16 +30,13 @@ const db = getFirestore(app);
 
 const dashboard = document.querySelector('[data-dashboard]');
 const authOnlyElements = document.querySelectorAll('[data-requires-auth]');
-const adminName = document.querySelector('[data-admin-name]');
 const logoutBtn = document.getElementById('logoutBtn');
 const tabs = document.querySelectorAll('.dashboard-tab');
 const sections = document.querySelectorAll('.dashboard-section');
 const imageForm = document.querySelector('[data-image-form]');
 const videoForm = document.querySelector('[data-video-form]');
 const imagePreviewWrapper = document.querySelector('[data-image-preview-wrapper]');
-const imagePreview = document.querySelector('[data-image-preview]');
 const videoPreviewWrapper = document.querySelector('[data-video-preview-wrapper]');
-const videoPreview = document.querySelector('[data-video-preview]');
 const videoUploadBtn = document.querySelector('[data-video-upload-btn]');
 const videoUploadHint = document.querySelector('[data-video-upload-hint]');
 const imageList = document.querySelector('[data-image-list]');
@@ -59,28 +56,6 @@ const formatter = new Intl.DateTimeFormat('en-NG', {
   dateStyle: 'medium',
   timeStyle: 'short',
 });
-
-function formatAdminName(user) {
-  if (!user) return 'Administrator';
-  const displayName = user.displayName?.trim();
-  if (displayName) {
-    return displayName;
-  }
-  const email = user.email?.trim();
-  if (email) {
-    const localPart = email.split('@')[0] || '';
-    if (localPart) {
-      const friendly = localPart
-        .replace(/[\.\-_]+/g, ' ')
-        .replace(/\b\w/g, (char) => char.toUpperCase())
-        .trim();
-      if (friendly) {
-        return friendly;
-      }
-    }
-  }
-  return 'Administrator';
-}
 
 function showToast(message, variant = 'default') {
   if (!toast) return;
@@ -110,18 +85,17 @@ function toggleView(isAuthenticated) {
 }
 
 function clearPreviews() {
-  if (imagePreviewWrapper && imagePreview) {
+  if (imagePreviewWrapper) {
+    imagePreviewWrapper.innerHTML = '';
     imagePreviewWrapper.setAttribute('hidden', '');
-    imagePreview.src = '';
   }
-  if (videoPreviewWrapper && videoPreview) {
-    videoPreviewWrapper.setAttribute('hidden', '');
-    if (videoPreview.dataset.previewUrl) {
-      URL.revokeObjectURL(videoPreview.dataset.previewUrl);
-      delete videoPreview.dataset.previewUrl;
+  if (videoPreviewWrapper) {
+    if (videoPreviewWrapper.dataset.previewUrl) {
+      URL.revokeObjectURL(videoPreviewWrapper.dataset.previewUrl);
+      delete videoPreviewWrapper.dataset.previewUrl;
     }
-    videoPreview.removeAttribute('src');
-    videoPreview.load();
+    videoPreviewWrapper.innerHTML = '';
+    videoPreviewWrapper.setAttribute('hidden', '');
   }
 }
 
@@ -272,29 +246,52 @@ function detachMediaListeners() {
 
 function handlePreview(event, type, elements = {}) {
   const file = event.target.files?.[0];
-  if (!file) return;
+  if (!file) {
+    const wrapper =
+      type === 'image' ? elements.wrapper || imagePreviewWrapper : elements.wrapper || videoPreviewWrapper;
+    if (wrapper) {
+      if (type === 'video' && wrapper.dataset.previewUrl) {
+        URL.revokeObjectURL(wrapper.dataset.previewUrl);
+        delete wrapper.dataset.previewUrl;
+      }
+      wrapper.innerHTML = '';
+      wrapper.setAttribute('hidden', '');
+    }
+    return;
+  }
 
   if (type === 'image') {
     const wrapper = elements.wrapper || imagePreviewWrapper;
-    const previewEl = elements.preview || imagePreview;
-    if (!wrapper || !previewEl) return;
+    if (!wrapper) return;
+    wrapper.innerHTML = '';
     const reader = new FileReader();
     reader.onload = () => {
-      previewEl.src = reader.result;
+      const img = document.createElement('img');
+      img.src = reader.result;
+      img.alt = file.name || 'Selected image preview';
+      img.loading = 'lazy';
+      wrapper.innerHTML = '';
+      wrapper.appendChild(img);
       wrapper.removeAttribute('hidden');
     };
     reader.readAsDataURL(file);
   } else if (type === 'video') {
     const wrapper = elements.wrapper || videoPreviewWrapper;
-    const previewEl = elements.preview || videoPreview;
-    if (!wrapper || !previewEl) return;
-    if (previewEl.dataset.previewUrl) {
-      URL.revokeObjectURL(previewEl.dataset.previewUrl);
+    if (!wrapper) return;
+    if (wrapper.dataset.previewUrl) {
+      URL.revokeObjectURL(wrapper.dataset.previewUrl);
     }
+    wrapper.innerHTML = '';
+    const videoEl = document.createElement('video');
+    videoEl.controls = true;
+    videoEl.playsInline = true;
+    videoEl.muted = true;
+    videoEl.setAttribute('preload', 'metadata');
     const url = URL.createObjectURL(file);
-    previewEl.src = url;
-    previewEl.dataset.previewUrl = url;
-    previewEl.load();
+    videoEl.src = url;
+    wrapper.dataset.previewUrl = url;
+    wrapper.appendChild(videoEl);
+    videoEl.load();
     wrapper.removeAttribute('hidden');
   }
 }
@@ -541,11 +538,9 @@ onAuthStateChanged(auth, (user) => {
     return;
   }
   toggleView(!!user);
-  if (user && adminName) {
-    adminName.textContent = formatAdminName(user);
+  if (user) {
     subscribeToMedia();
   } else {
-    adminName.textContent = 'Administrator';
     detachMediaListeners();
     clearPreviews();
   }

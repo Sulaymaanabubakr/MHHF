@@ -39,7 +39,7 @@
     <main class="admin-main admin-main--dashboard">
       <section class="dashboard" data-dashboard hidden>
         <div class="admin-greeting">
-          <h1>Welcome back, <span data-admin-name>Administrator</span>!</h1>
+          <h1>Welcome back!</h1>
           <p>Upload, edit, and curate the media stories that power the Muslims Helping Humanity Foundation.</p>
         </div>
 
@@ -69,9 +69,7 @@
                 <label for="imageFile">Image File</label>
                 <input type="file" id="imageFile" name="file" accept="image/*" required />
               </div>
-              <div class="preview" data-image-preview-wrapper hidden>
-                <img src="" alt="Selected image preview" data-image-preview />
-              </div>
+              <div class="preview" data-image-preview-wrapper hidden></div>
               <button type="submit" class="btn btn--primary">
                 <i class="ri-upload-cloud-2-line"></i>
                 Upload Image
@@ -112,9 +110,7 @@
                 <input type="file" id="videoFile" name="file" accept="video/*" required />
                 <p class="form-hint" data-video-upload-hint>Choose an MP4, MOV, or WEBM file to upload.</p>
               </div>
-              <div class="preview" data-video-preview-wrapper hidden>
-                <video controls data-video-preview></video>
-              </div>
+              <div class="preview" data-video-preview-wrapper hidden></div>
               <button type="submit" class="btn btn--primary" data-video-upload-btn>
                 <i class="ri-video-upload-line"></i>
                 Upload Video
