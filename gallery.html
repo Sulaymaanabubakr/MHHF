@@ -4,11 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gallery | Muslims Helping Humanity Foundation</title>
+    <meta name="title" content="Muslims Helping Humanity Foundation (MHHF) – Empowering Widows, Orphans &amp; The Less Privileged" />
+    <meta name="description" content="MHHF is a non-profit organisation based in Ibadan, Nigeria, focused on empowering widows, supporting orphans, promoting education, and providing clean water and humanitarian aid." />
+    <meta property="og:title" content="Muslims Helping Humanity Foundation (MHHF) – Empowering Widows, Orphans &amp; The Less Privileged" />
+    <meta property="og:description" content="MHHF is a non-profit organisation based in Ibadan, Nigeria, focused on empowering widows, supporting orphans, promoting education, and providing clean water and humanitarian aid." />
+    <meta property="og:image" content="https://res.cloudinary.com/your_cloud_name/logo.png" />
+    <meta property="og:url" content="https://muslimshelpinghumanity.org.ng" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Muslims Helping Humanity Foundation (MHHF) – Empowering Widows, Orphans &amp; The Less Privileged" />
+    <meta name="twitter:description" content="MHHF is a non-profit organisation based in Ibadan, Nigeria, focused on empowering widows, supporting orphans, promoting education, and providing clean water and humanitarian aid." />
+    <meta name="twitter:image" content="https://res.cloudinary.com/your_cloud_name/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SbTMobZyylaZpj+51TL0oJC/oUNsGrD+VUKPTN3lNMndvrYVF/1DdbC+aD7agEXkNKOxPQ0PqSxkbZVqM9UeOg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body>
     <header>
@@ -29,7 +39,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="focus.html">Our Focus</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="gallery.html" class="active">Gallery</a></li>
           <li><a href="get-involved.html">Get Involved</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -42,22 +52,30 @@
           <div class="section__header fade-up">
             <span class="section__label">Moments of Impact</span>
             <h1 class="section__title">Gallery</h1>
-            <p class="section__subtitle">Snapshots from our outreach programmes, empowerment trainings, school support drives, and water projects.</p>
+            <p class="section__subtitle">Snapshots from outreaches, empowerment trainings, school support drives, and water projects completed by the Muslims Helping Humanity Foundation.</p>
           </div>
 
-          <div class="gallery-grid">
-            <img class="fade-up" src="https://images.unsplash.com/photo-1515169067865-5387ec356754?auto=format&fit=crop&w=900&q=80" alt="Volunteers distributing food" />
-            <img class="fade-up" src="https://images.unsplash.com/photo-1544473244-fd7a6b0d8c1b?auto=format&fit=crop&w=900&q=80" alt="Children receiving school supplies" />
-            <img class="fade-up" src="https://images.unsplash.com/photo-1509097911487-4556d084c48e?auto=format&fit=crop&w=900&q=80" alt="Water project" />
-            <img class="fade-up" src="https://images.unsplash.com/photo-1529158062015-cad636e69505?auto=format&fit=crop&w=900&q=80" alt="Community empowerment" />
-            <img class="fade-up" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=80" alt="Mentorship" />
-            <img class="fade-up" src="https://images.unsplash.com/photo-1515169067865-5387ec356754?auto=format&fit=crop&w=900&q=80" alt="Community outreach" />
-            <img class="fade-up" src="https://images.unsplash.com/photo-1468807473755-af0829d48620?auto=format&fit=crop&w=900&q=80" alt="Women empowerment" />
-            <img class="fade-up" src="https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=900&q=80" alt="Kids smiling" />
+          <div class="media-grid gallery-grid fade-up" data-gallery-full-grid>
+            <p class="media-empty">Gallery updates will appear here once uploaded.</p>
           </div>
         </div>
       </section>
     </main>
+
+    <div class="media-lightbox" data-gallery-modal hidden>
+      <div class="media-lightbox__dialog">
+        <button class="media-lightbox__close" type="button" data-gallery-modal-close aria-label="Close gallery preview">
+          <i class="ri-close-line"></i>
+        </button>
+        <div class="media-lightbox__content">
+          <img src="" alt="" data-gallery-modal-image />
+          <div class="media-lightbox__details">
+            <h3 data-gallery-modal-title></h3>
+            <p data-gallery-modal-description></p>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <footer>
       <div class="footer__inner">
@@ -80,21 +98,30 @@
             <li><a href="contact.html">Contact</a></li>
           </ul>
         </div>
-        <div>
+        <div class="footer__contact">
+          <h4>Contact</h4>
+          <ul>
+            <li><i class="ri-whatsapp-line"></i><a href="https://wa.me/2348039168308" target="_blank" rel="noopener">08039168308</a></li>
+            <li><i class="ri-phone-line"></i><a href="tel:+2348108997871">08108997871</a>, <a href="tel:+2348148833043">08148833043</a></li>
+            <li><i class="ri-mail-line"></i><a href="mailto:mhminitiative20@gmail.com">mhminitiative20@gmail.com</a></li>
+          </ul>
+        </div>
+        <div class="footer__socials">
           <h4>Connect</h4>
           <div class="socials">
-            <a href="https://www.facebook.com" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.tiktok.com" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.facebook.com/MuslimsHelpingHumanityFoundation" aria-label="Facebook" target="_blank" rel="noopener"><i class="ri-facebook-circle-fill"></i></a>
+            <a href="https://www.instagram.com/mhhf003" aria-label="Instagram" target="_blank" rel="noopener"><i class="ri-instagram-line"></i></a>
+            <a href="https://www.tiktok.com/@muslimshelpinghumanity" aria-label="TikTok" target="_blank" rel="noopener"><i class="ri-tiktok-fill"></i></a>
           </div>
         </div>
       </div>
       <p class="footer__note">Muslims Helping Humanity Foundation © 2025. All Rights Reserved. Built with love to serve humanity.</p>
     </footer>
 
-    <a href="https://wa.me/2348039168308" class="whatsapp-float" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://wa.me/2348039168308" class="whatsapp-float" aria-label="Chat on WhatsApp"><i class="ri-whatsapp-line"></i></a>
 
     <script src="https://js.paystack.co/v1/inline.js"></script>
     <script src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/media.js"></script>
   </body>
 </html>
