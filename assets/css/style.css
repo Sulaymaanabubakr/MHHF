@@ -414,6 +414,120 @@ header {
   color: var(--text-muted);
 }
 
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .about-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.about-card {
+  background: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: 0 16px 40px rgba(20, 51, 94, 0.08);
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-soft);
+}
+
+.about-card__image {
+  position: relative;
+  overflow: hidden;
+}
+
+.about-card__image img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.about-card:hover .about-card__image img {
+  transform: scale(1.05);
+}
+
+.about-card__body {
+  padding: 1.5rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.about-card__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  color: var(--deep-blue);
+}
+
+.about-card__text {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .activities-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.activities-card {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(20, 51, 94, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.activities-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-soft);
+}
+
+.activities-card__media {
+  position: relative;
+}
+
+.activities-card__media img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.activities-card__label {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(20, 51, 94, 0.85);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
 .values {
   display: grid;
   gap: 1.5rem;
