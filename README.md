@@ -84,6 +84,98 @@ To create a world where every widow is empowered, every orphan is supported, and
 
 ---
 
+## 🚀 Version 2.1 Update – Admin Dashboard & Media Management System
+
+This update introduces a complete **Admin Dashboard** and dynamic **media-management system** for the Muslims Helping Humanity Foundation (MHHF) website — built with **Firebase** and **Cloudinary** while preserving the existing design, responsiveness, and structure.
+
+### 🔐 Admin Dashboard (`admin-mhhf.html`)
+- Secure **Firebase Authentication** with **Email/Password + Google Login**.  
+- Supports **multiple admins** (organisation-wide access).  
+- Full **header & footer** consistent with main site.  
+- **Logout button** in header works correctly on all screens.  
+- **Mobile-first** responsive layout.
+
+### 🖼️ Image Management
+Admins can:
+- Upload **images** with *title + description*.  
+- View **preview** before upload.  
+- Uploads stored in **Cloudinary → mhhf/images/** and referenced in Firestore.  
+- **Edit:** opens popup pre-filled with existing data; saves updates automatically.  
+- **Delete:** asks confirmation (“Are you sure you want to delete this item?”) before removal from Firestore + Cloudinary.
+
+### 🎥 Video Management
+Admins can:
+- Upload **videos** with *title + description*.  
+- Upload process shows *“Uploading… please wait”* and disables the button until done, then re-enables.  
+- Stored in **Cloudinary → mhhf/videos/** and Firestore.  
+- **Edit:** popup with all fields auto-populated.  
+- **Delete:** confirmation prompt before removal.
+
+### 🏠 Homepage Enhancement
+Adds two new dynamic sections populated from Firestore:
+
+**Our Gallery**  
+- Displays 10 latest images (2 per row mobile, 4 desktop).  
+- Each card shows image + title + short description.  
+- “View All Images” button → `/gallery.html`.
+
+**Our Videos**  
+- Displays 4 latest videos (1 per row mobile, 2 desktop).  
+- Embedded `<video>` players with controls.  
+- “View All Videos” button → `/videos.html`.
+
+### 📄 Dedicated Pages
+**Gallery Page (`gallery.html`)**  
+- Loads all images dynamically, modal/lightbox for full view.
+
+**Videos Page (`videos.html`)**  
+- Lists all uploaded videos with embedded players, titles, and descriptions.
+
+### 🧠 Database & Storage Structure
+**Firestore**
+media_images/
+id, title, description, imageUrl, createdAt
+media_videos/
+id, title, description, videoUrl, createdAt
+
+markdown
+Copy code
+
+**Cloudinary Folders**
+mhhf/images/
+mhhf/videos/
+
+yaml
+Copy code
+
+### 🎨 Design & Icons
+- Uses **Remix Icons** for all icons (replaces Font Awesome).  
+- Retains brand colours (Blue, Green, Orange, Yellow) and rounded, soft UI.
+
+### 🌐 Social & SEO Integration
+- Auto-displays official contact info and social links in footer.  
+- Complete SEO meta tags + Open Graph data on every page.
+
+### ⚙️ Tech Stack
+HTML · CSS · JavaScript (ES6) · Firebase Auth/Firestore · Cloudinary · Netlify / Vercel Hosting.
+
+### ✅ Functionality Checklist
+- [x] Multi-admin login (Google + Email)  
+- [x] Upload / Edit / Delete images and videos  
+- [x] Upload preview + progress state  
+- [x] Responsive admin dashboard with logout  
+- [x] Homepage shows latest media  
+- [x] SEO and social links verified  
+- [x] All Remix Icons render correctly  
+
+---
+
+📦 **Release Date:** October 2025  
+🧑‍💻 **Developed by:** Project Team – Muslims Helping Humanity Foundation  
+❤️ *Built with love to serve humanity.*
+
+---
+
 ## 🌐 Domain
 
 [https://muslimshelpinghumanity.org.ng](https://muslimshelpinghumanity.org.ng)
