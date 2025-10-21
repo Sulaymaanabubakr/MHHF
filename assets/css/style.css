@@ -164,7 +164,7 @@ header {
 .hero__background {
   position: absolute;
   inset: 0;
-  background: url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  background: url('../logo.jpeg') center/cover no-repeat;
   z-index: -1;
 }
 
