@@ -60,7 +60,15 @@
               <div class="card__icon"><i class="ri-hand-heart-line"></i></div>
               <h3 class="card__title">Donate</h3>
               <p class="card__text">Give a one-time or recurring gift to support widows, orphans, education, water, and empowerment projects.</p>
-              <button class="btn btn--primary" onclick="payWithPaystack()">Donate via Paystack</button>
+              <div class="donation-widget" data-donation>
+                <label for="donateAmountPrimary" class="donation-label">Amount (NGN)</label>
+                <div class="donation-amount">
+                  <span class="donation-symbol">₦</span>
+                  <input type="number" id="donateAmountPrimary" data-donation-amount min="100" step="100" placeholder="5000" inputmode="numeric" />
+                </div>
+                <small class="donation-hint">Enter any amount from ₦100 and above, then proceed via Paystack.</small>
+                <button type="button" class="btn btn--primary" data-donation-button>Donate via Paystack</button>
+              </div>
             </div>
             <div class="involved-card fade-up">
               <div class="card__icon"><i class="ri-handshake-line"></i></div>
@@ -114,7 +122,15 @@
               </div>
               <div class="donation-card__body">
                 <p class="donation-card__note">You can make a one-time gift or set up a recurring donation through Paystack. Every naira helps us reach more widows, orphans, and vulnerable families.</p>
-                <button class="btn btn--primary" onclick="payWithPaystack()">Donate via Paystack</button>
+                <div class="donation-widget" data-donation>
+                  <label for="donateAmountSecondary" class="donation-label">Amount (NGN)</label>
+                  <div class="donation-amount">
+                    <span class="donation-symbol">₦</span>
+                    <input type="number" id="donateAmountSecondary" data-donation-amount min="100" step="100" placeholder="7500" inputmode="numeric" />
+                  </div>
+                  <small class="donation-hint">Choose any amount you are comfortable giving.</small>
+                  <button type="button" class="btn btn--primary" data-donation-button>Donate via Paystack</button>
+                </div>
               </div>
             </div>
           </div>

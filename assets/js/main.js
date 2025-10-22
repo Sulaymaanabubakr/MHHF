@@ -101,15 +101,27 @@ if (contactForm) {
   });
 }
 
-window.payWithPaystack = function payWithPaystack() {
+window.payWithPaystack = function payWithPaystack(amountNaira) {
+  let amount = Number(amountNaira);
+  if (!amount || Number.isNaN(amount)) {
+    const promptValue = window.prompt('Enter the amount you would like to donate (NGN):');
+    amount = Number(promptValue);
+  }
+
+  if (!amount || Number.isNaN(amount) || amount < 100) {
+    alert('Please enter a valid amount of at least ₦100.');
+    return;
+  }
+
+  const amountKobo = Math.round(amount * 100);
   const handler = PaystackPop.setup({
     key: 'pk_live_f7d549c5c73b6fef7105df1dd3d4cbe209ce396a',
     email: 'donor@example.com',
-    amount: 5000,
+    amount: amountKobo,
     currency: 'NGN',
     ref: `MHHF-${Date.now()}`,
     callback(response) {
-      alert('Thank you for supporting MHHF! Transaction reference: ' + response.reference);
+      alert(`Thank you for supporting MHHF! Reference: ${response.reference}`);
     },
     onClose() {
       alert('Donation window closed. You can try again anytime.');
@@ -118,3 +130,29 @@ window.payWithPaystack = function payWithPaystack() {
 
   handler.openIframe();
 };
+
+
+const donationButtons = document.querySelectorAll('[data-donation-button]');
+donationButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const donationBlock = button.closest('[data-donation]');
+    const amountField = donationBlock?.querySelector('[data-donation-amount]');
+    const rawValue = amountField?.value?.trim();
+    const amount = Number(rawValue);
+
+    if (!amount || Number.isNaN(amount) || amount < 100) {
+      alert('Please enter a valid amount of at least ₦100.');
+      amountField?.focus();
+      return;
+    }
+
+    const originalText = button.textContent;
+    button.textContent = 'Redirecting…';
+    button.disabled = true;
+    payWithPaystack(amount);
+    setTimeout(() => {
+      button.textContent = originalText;
+      button.disabled = false;
+    }, 1800);
+  });
+});

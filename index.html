@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Muslims Helping Humanity Foundation | A Beacon of Hope</title>
-    <meta name="title" content="Muslims Helping Humanity Foundation (MHHF) – Empowering Widows, Orphans &amp; The Less Privileged" />
+    <meta name="title" content="Muslims Helping Humanity Foundation (MHHF) ΓÇô Empowering Widows, Orphans &amp; The Less Privileged" />
     <meta name="description" content="MHHF is a non-profit organisation based in Ibadan, Nigeria, focused on empowering widows, supporting orphans, promoting education, and providing clean water and humanitarian aid." />
-    <meta property="og:title" content="Muslims Helping Humanity Foundation (MHHF) – Empowering Widows, Orphans &amp; The Less Privileged" />
+    <meta property="og:title" content="Muslims Helping Humanity Foundation (MHHF) ΓÇô Empowering Widows, Orphans &amp; The Less Privileged" />
     <meta property="og:description" content="MHHF is a non-profit organisation based in Ibadan, Nigeria, focused on empowering widows, supporting orphans, promoting education, and providing clean water and humanitarian aid." />
     <meta property="og:image" content="https://res.cloudinary.com/your_cloud_name/logo.png" />
     <meta property="og:url" content="https://muslimshelpinghumanity.org.ng" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Muslims Helping Humanity Foundation (MHHF) – Empowering Widows, Orphans &amp; The Less Privileged" />
+    <meta name="twitter:title" content="Muslims Helping Humanity Foundation (MHHF) ΓÇô Empowering Widows, Orphans &amp; The Less Privileged" />
     <meta name="twitter:description" content="MHHF is a non-profit organisation based in Ibadan, Nigeria, focused on empowering widows, supporting orphans, promoting education, and providing clean water and humanitarian aid." />
     <meta name="twitter:image" content="https://res.cloudinary.com/your_cloud_name/logo.png" />
     <meta
@@ -224,9 +224,17 @@
           <div class="cta-banner fade-up">
             <h2 class="section__title" style="color: #fff;">Support Our Mission</h2>
             <p>Your kindness fuels sustainable change. Donate, volunteer, or partner with us to empower widows, uplift orphans, and provide communities with the tools to thrive.</p>
-            <div class="btn-group">
-              <button class="btn btn--primary" onclick="payWithPaystack()">Donate Securely</button>
-              <a href="get-involved.html" class="btn btn--outline" style="border-color: rgba(255, 255, 255, 0.7);">Become a Volunteer</a>
+            <div class="donation-widget donation-widget--cta" data-donation>
+              <label for="donateAmountCta" class="donation-label donation-label--light">Amount (NGN)</label>
+              <div class="donation-amount">
+                <span class="donation-symbol">₦</span>
+                <input type="number" id="donateAmountCta" data-donation-amount min="100" step="100" placeholder="10000" inputmode="numeric" />
+              </div>
+              <small class="donation-hint donation-hint--light">Set any amount from ₦100 and above to give instantly.</small>
+              <div class="btn-group">
+                <button type="button" class="btn btn--primary" data-donation-button>Donate Securely</button>
+                <a href="get-involved.html" class="btn btn--outline" style="border-color: rgba(255, 255, 255, 0.7);">Become a Volunteer</a>
+              </div>
             </div>
           </div>
         </div>
@@ -271,7 +279,7 @@
           </div>
         </div>
       </div>
-      <p class="footer__note">Muslims Helping Humanity Foundation © 2025. All Rights Reserved. Built with love to serve humanity.</p>
+      <p class="footer__note">Muslims Helping Humanity Foundation ┬⌐ 2025. All Rights Reserved. Built with love to serve humanity.</p>
     </footer>
 
     <a href="https://wa.me/2348039168308" class="whatsapp-float" aria-label="Chat on WhatsApp"><i class="ri-whatsapp-line"></i></a>
