@@ -1,3 +1,6 @@
+// =======================
+// NAVIGATION TOGGLE
+// =======================
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 
@@ -23,6 +26,9 @@ if (navToggle && navLinks) {
   });
 }
 
+// =======================
+// SCROLL ANIMATIONS
+// =======================
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -32,15 +38,14 @@ const observer = new IntersectionObserver(
       }
     });
   },
-  {
-    threshold: 0.2,
-  }
+  { threshold: 0.2 }
 );
+document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
 
-document.querySelectorAll('.fade-up').forEach((element) => observer.observe(element));
-
+// =======================
+// COUNTERS
+// =======================
 const counters = document.querySelectorAll('[data-counter]');
-
 const counterObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -67,24 +72,31 @@ const counterObserver = new IntersectionObserver(
   },
   { threshold: 0.3 }
 );
-
 counters.forEach((counter) => counterObserver.observe(counter));
 
+// =======================
+// CONTACT FORM (WhatsApp redirect)
+// =======================
 const contactForm = document.querySelector('[data-contact-form]');
 if (contactForm) {
   contactForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const button = contactForm.querySelector('button[type="submit"]');
     const formData = new FormData(contactForm);
-    const name = formData.get('name')₦.toString().trim() || 'A concerned supporter';
-    const email = formData.get('email')₦.toString().trim() || 'Not provided';
-    const phone = formData.get('phone')₦.toString().trim() || 'Not provided';
-    const enquiry = formData.get('message')₦.toString().trim();
+
+    const name = (formData.get('name') || 'A concerned supporter').toString().trim();
+    const email = (formData.get('email') || 'Not provided').toString().trim();
+    const phone = (formData.get('phone') || 'Not provided').toString().trim();
+    const enquiry = (formData.get('message') || '').toString().trim();
+
     const intro = "As salaamu alaykum warahmotullahi wabarakaatuhu, I'd like to ";
-    const messageIntent = enquiry ₦ `${intro}${enquiry}` : `${intro}learn more about the Muslims Helping Humanity Foundation.`;
+    const messageIntent = enquiry
+      ? `${intro}${enquiry}`
+      : `${intro}learn more about the Muslims Helping Humanity Foundation.`;
+
     const details = `\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`;
     const whatsappNumber = '2348039168308';
-    const whatsappUrl = `https://wa.me/${whatsappNumber}₦text=${encodeURIComponent(`${messageIntent}${details}`)}`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`${messageIntent}${details}`)}`;
 
     if (button) {
       const originalText = button.textContent;
@@ -101,6 +113,9 @@ if (contactForm) {
   });
 }
 
+// =======================
+// PAYSTACK DONATION
+// =======================
 window.payWithPaystack = function payWithPaystack(amountNaira) {
   let amount = Number(amountNaira);
   if (!amount || Number.isNaN(amount)) {
@@ -112,7 +127,7 @@ window.payWithPaystack = function payWithPaystack(amountNaira) {
     showDonationNotification({
       variant: 'error',
       title: '❌ Transaction Unsuccessful',
-      message: 'SubhanAllah, your donation did not go through. Please enter a valid amount of at least ₦100 and try again. May Allah reward your sincere intention.',
+      message: `SubhanAllah, your donation did not go through. Please enter a valid amount of at least ₦100 and try again. May Allah reward your sincere intention.`,
       showRetry: true,
     });
     return;
@@ -129,14 +144,14 @@ window.payWithPaystack = function payWithPaystack(amountNaira) {
       showDonationNotification({
         variant: 'success',
         title: '🎉 Alhamdulillah! Your Donation Was Successful!',
-        message: `JazakAllahu Khayran for your generous contribution to the Muslims Helping Humanity Foundation (MHHF). Your kindness will support widows, orphans, and the less privileged, and may Allah accept it as Sadaqah Jariyah for you and your loved ones.<br><br>We pray Allah (SWT) blesses your wealth, multiplies your reward, and grants you goodness in this world and the Hereafter.<br><br><em>"The believer’s shade on the Day of Judgment will be his charity." – Prophet Muhammad ﷺ</em><br><br>Thank you for being part of our mission to spread compassion and hope.`,
+        message: `JazakAllahu Khayran for your generous contribution to the <strong>Muslims Helping Humanity Foundation (MHHF)</strong>.<br><br>Your kindness will support widows, orphans, and the less privileged — and may Allah accept it as <em>Sadaqah Jariyah</em> for you and your loved ones.<br><br>We pray that Allah (SWT) blesses your wealth, multiplies your reward, and grants you goodness in this world and the Hereafter.<br><br><em>"The believer’s shade on the Day of Judgment will be his charity." – Prophet Muhammad ﷺ</em><br><br><strong>Thank you for being part of our mission to spread compassion and hope.</strong>`,
       });
     },
     onClose() {
       showDonationNotification({
         variant: 'error',
         title: '❌ Transaction Unsuccessful',
-        message: `SubhanAllah, your donation didn’t go through this time — but your intention has already been recorded with Allah (SWT). The Prophet ﷺ said: "Whoever intends to do a good deed but does not do it, Allah records it as a complete good deed." (Sahih Muslim)<br><br>You can try again in a few moments or contact us if you continue to experience issues. May Allah bless your wealth, ease your affairs, and accept all your intentions.`,
+        message: `SubhanAllah, your donation didn’t go through this time — but please don’t be disheartened.<br><br>Allah (SWT) rewards every good intention even before it becomes action. The Prophet ﷺ said: <em>"Whoever intends to do a good deed but does not do it, Allah records it as a full good deed."</em> (Sahih Muslim)<br><br>Your intention to give in charity is already recorded with Allah, and He knows your sincerity.<br><br>You can try again in a few moments or contact us if you continue to experience issues.<br><br><strong>May Allah bless your wealth, ease your affairs, and accept all your good intentions as acts of worship.</strong>`,
         showRetry: true,
       });
     },
@@ -145,6 +160,9 @@ window.payWithPaystack = function payWithPaystack(amountNaira) {
   handler.openIframe();
 };
 
+// =======================
+// DONATION BUTTON HANDLER
+// =======================
 const donationButtons = document.querySelectorAll('[data-donation-button]');
 donationButtons.forEach((button) => {
   button.addEventListener('click', () => {
@@ -175,6 +193,9 @@ donationButtons.forEach((button) => {
   });
 });
 
+// =======================
+// DONATION NOTIFICATION UI
+// =======================
 const donationNotice = (() => {
   const wrapper = document.createElement('div');
   wrapper.className = 'donation-notice';
@@ -208,9 +229,6 @@ function showDonationNotification({ variant, title, message, showRetry = false }
   bodyEl.innerHTML = message;
   retryBtn.hidden = !showRetry;
   homeBtn.hidden = false;
-
-  retryBtn.textContent = '🔁 Try Again';
-  homeBtn.textContent = '🏠 Return Home';
 
   const closeNotice = () => donationNotice.setAttribute('hidden', '');
   donationNotice.querySelector('.donation-notice__close').onclick = closeNotice;
