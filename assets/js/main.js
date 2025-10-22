@@ -230,7 +230,13 @@ function showDonationNotification({ variant, title, message, showRetry = false }
   retryBtn.hidden = !showRetry;
   homeBtn.hidden = false;
 
-  const closeNotice = () => donationNotice.setAttribute('hidden', '');
+  // Function to close the pop-up
+  const closeNotice = () => {
+    donationNotice.setAttribute('hidden', '');
+    document.body.style.overflow = ''; // re-enable background scrolling
+  };
+
+  // Assign the close function to buttons
   donationNotice.querySelector('.donation-notice__close').onclick = closeNotice;
   retryBtn.onclick = closeNotice;
   homeBtn.onclick = () => {
@@ -238,5 +244,7 @@ function showDonationNotification({ variant, title, message, showRetry = false }
     window.location.href = 'index.html';
   };
 
+  // Show the pop-up
   donationNotice.removeAttribute('hidden');
+  document.body.style.overflow = 'hidden'; // disable background scroll
 }
