@@ -76,15 +76,15 @@ if (contactForm) {
     event.preventDefault();
     const button = contactForm.querySelector('button[type="submit"]');
     const formData = new FormData(contactForm);
-    const name = formData.get('name')?.toString().trim() || 'A concerned supporter';
-    const email = formData.get('email')?.toString().trim() || 'Not provided';
-    const phone = formData.get('phone')?.toString().trim() || 'Not provided';
-    const enquiry = formData.get('message')?.toString().trim();
+    const name = formData.get('name')₦.toString().trim() || 'A concerned supporter';
+    const email = formData.get('email')₦.toString().trim() || 'Not provided';
+    const phone = formData.get('phone')₦.toString().trim() || 'Not provided';
+    const enquiry = formData.get('message')₦.toString().trim();
     const intro = "As salaamu alaykum warahmotullahi wabarakaatuhu, I'd like to ";
-    const messageIntent = enquiry ? `${intro}${enquiry}` : `${intro}learn more about the Muslims Helping Humanity Foundation.`;
+    const messageIntent = enquiry ₦ `${intro}${enquiry}` : `${intro}learn more about the Muslims Helping Humanity Foundation.`;
     const details = `\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`;
     const whatsappNumber = '2348039168308';
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`${messageIntent}${details}`)}`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}₦text=${encodeURIComponent(`${messageIntent}${details}`)}`;
 
     if (button) {
       const originalText = button.textContent;
@@ -109,7 +109,12 @@ window.payWithPaystack = function payWithPaystack(amountNaira) {
   }
 
   if (!amount || Number.isNaN(amount) || amount < 100) {
-    alert('Please enter a valid amount of at least ₦100.');
+    showDonationNotification({
+      variant: 'error',
+      title: '❌ Transaction Unsuccessful',
+      message: 'SubhanAllah, your donation did not go through. Please enter a valid amount of at least ₦100 and try again. May Allah reward your sincere intention.',
+      showRetry: true,
+    });
     return;
   }
 
@@ -121,16 +126,24 @@ window.payWithPaystack = function payWithPaystack(amountNaira) {
     currency: 'NGN',
     ref: `MHHF-${Date.now()}`,
     callback(response) {
-      alert(`Thank you for supporting MHHF! Reference: ${response.reference}`);
+      showDonationNotification({
+        variant: 'success',
+        title: '🎉 Alhamdulillah! Your Donation Was Successful!',
+        message: `JazakAllahu Khayran for your generous contribution to the Muslims Helping Humanity Foundation (MHHF). Your kindness will support widows, orphans, and the less privileged, and may Allah accept it as Sadaqah Jariyah for you and your loved ones.<br><br>We pray Allah (SWT) blesses your wealth, multiplies your reward, and grants you goodness in this world and the Hereafter.<br><br><em>"The believer’s shade on the Day of Judgment will be his charity." – Prophet Muhammad ﷺ</em><br><br>Thank you for being part of our mission to spread compassion and hope.`,
+      });
     },
     onClose() {
-      alert('Donation window closed. You can try again anytime.');
+      showDonationNotification({
+        variant: 'error',
+        title: '❌ Transaction Unsuccessful',
+        message: `SubhanAllah, your donation didn’t go through this time — but your intention has already been recorded with Allah (SWT). The Prophet ﷺ said: "Whoever intends to do a good deed but does not do it, Allah records it as a complete good deed." (Sahih Muslim)<br><br>You can try again in a few moments or contact us if you continue to experience issues. May Allah bless your wealth, ease your affairs, and accept all your intentions.`,
+        showRetry: true,
+      });
     },
   });
 
   handler.openIframe();
 };
-
 
 const donationButtons = document.querySelectorAll('[data-donation-button]');
 donationButtons.forEach((button) => {
@@ -141,7 +154,12 @@ donationButtons.forEach((button) => {
     const amount = Number(rawValue);
 
     if (!amount || Number.isNaN(amount) || amount < 100) {
-      alert('Please enter a valid amount of at least ₦100.');
+      showDonationNotification({
+        variant: 'error',
+        title: '❌ Transaction Unsuccessful',
+        message: `SubhanAllah, your donation didn’t go through. Please enter at least ₦100 so we can process it. Remember, Allah counts every sincere intention as a full good deed.`,
+        showRetry: true,
+      });
       amountField?.focus();
       return;
     }
@@ -156,7 +174,6 @@ donationButtons.forEach((button) => {
     }, 1800);
   });
 });
-
 
 const donationNotice = (() => {
   const wrapper = document.createElement('div');
@@ -191,6 +208,9 @@ function showDonationNotification({ variant, title, message, showRetry = false }
   bodyEl.innerHTML = message;
   retryBtn.hidden = !showRetry;
   homeBtn.hidden = false;
+
+  retryBtn.textContent = '🔁 Try Again';
+  homeBtn.textContent = '🏠 Return Home';
 
   const closeNotice = () => donationNotice.setAttribute('hidden', '');
   donationNotice.querySelector('.donation-notice__close').onclick = closeNotice;
