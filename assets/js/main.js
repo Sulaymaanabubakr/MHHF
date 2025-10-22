@@ -75,19 +75,29 @@ if (contactForm) {
   contactForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const button = contactForm.querySelector('button[type="submit"]');
+    const formData = new FormData(contactForm);
+    const name = formData.get('name')?.toString().trim() || 'A concerned supporter';
+    const email = formData.get('email')?.toString().trim() || 'Not provided';
+    const phone = formData.get('phone')?.toString().trim() || 'Not provided';
+    const enquiry = formData.get('message')?.toString().trim();
+    const intro = "As salaamu alaykum warahmotullahi wabarakaatuhu, I'd like to ";
+    const messageIntent = enquiry ? `${intro}${enquiry}` : `${intro}learn more about the Muslims Helping Humanity Foundation.`;
+    const details = `\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`;
+    const whatsappNumber = '2348039168308';
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`${messageIntent}${details}`)}`;
+
     if (button) {
       const originalText = button.textContent;
-      button.textContent = 'Sending…';
+      button.textContent = 'Opening WhatsApp…';
       button.disabled = true;
       setTimeout(() => {
-        button.textContent = 'Message Sent!';
-        contactForm.reset();
-        setTimeout(() => {
-          button.textContent = originalText;
-          button.disabled = false;
-        }, 2500);
-      }, 1200);
+        button.textContent = originalText;
+        button.disabled = false;
+      }, 1500);
     }
+
+    window.open(whatsappUrl, '_blank');
+    contactForm.reset();
   });
 }
 
