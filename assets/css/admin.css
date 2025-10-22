@@ -79,9 +79,9 @@
 
 .admin-main {
   flex: 1;
-  width: min(100%, 1100px);
+  width: min(100%, 1040px);
   margin: 1.5rem auto 3rem;
-  padding: 0 clamp(0.75rem, 4vw, 1.25rem);
+  padding: 0 clamp(1rem, 5vw, 2rem);
   display: grid;
   gap: 1.5rem;
   box-sizing: border-box;
@@ -497,12 +497,14 @@
 }
 
 .admin-modal__dialog {
-  width: min(520px, 100%);
+  width: min(520px, calc(100% - 2rem));
+  max-width: 520px;
   background: #fff;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
   position: relative;
   padding: 2rem;
+  margin: 0 auto;
 }
 
 .admin-modal__close {

@@ -889,6 +889,19 @@ footer {
   gap: 0.5rem;
 }
 
+.section__actions .btn.btn--outline {
+  background: linear-gradient(135deg, var(--primary-blue), var(--vibrant-green));
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.75rem;
+  box-shadow: 0 15px 30px rgba(20, 51, 94, 0.18);
+}
+
+.section__actions .btn.btn--outline:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(20, 51, 94, 0.2);
+}
+
 .section__actions .btn i {
   font-size: 1.2rem;
 }

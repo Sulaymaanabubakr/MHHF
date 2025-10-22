@@ -37,6 +37,7 @@ const imageForm = document.querySelector('[data-image-form]');
 const videoForm = document.querySelector('[data-video-form]');
 const imagePreviewWrapper = document.querySelector('[data-image-preview-wrapper]');
 const videoPreviewWrapper = document.querySelector('[data-video-preview-wrapper]');
+const imageUploadBtn = document.querySelector('[data-image-upload-btn]');
 const videoUploadBtn = document.querySelector('[data-video-upload-btn]');
 const videoUploadHint = document.querySelector('[data-video-upload-hint]');
 const imageList = document.querySelector('[data-image-list]');
@@ -447,6 +448,11 @@ imageForm?.addEventListener('submit', async (event) => {
     showToast('Please choose an image file to upload.', 'error');
     return;
   }
+  const originalText = imageUploadBtn?.innerHTML;
+  if (imageUploadBtn) {
+    imageUploadBtn.disabled = true;
+    imageUploadBtn.innerHTML = '<i class="ri-time-line"></i>Uploading image…';
+  }
   try {
     const upload = await uploadToCloudinary(file, 'mhhf/images', 'image');
     const payload = {
@@ -467,6 +473,11 @@ imageForm?.addEventListener('submit', async (event) => {
   } catch (error) {
     console.error('Unable to upload image', error);
     showToast(getUploadErrorMessage('Image'), 'error');
+  } finally {
+    if (imageUploadBtn) {
+      imageUploadBtn.disabled = false;
+      imageUploadBtn.innerHTML = originalText || '<i class="ri-upload-cloud-2-line"></i>Upload Image';
+    }
   }
 });
 
