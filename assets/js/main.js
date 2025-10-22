@@ -103,7 +103,7 @@ if (contactForm) {
 
 window.payWithPaystack = function payWithPaystack() {
   const handler = PaystackPop.setup({
-    key: 'pk_test_replace_with_live_key',
+    key: 'pk_live_f7d549c5c73b6fef7105df1dd3d4cbe209ce396a',
     email: 'donor@example.com',
     amount: 5000,
     currency: 'NGN',
