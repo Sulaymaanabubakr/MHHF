@@ -1,0 +1,7 @@
+---
+deployment:
+  tasks:
+    # Update the deployment path to match your cPanel account before running a deployment.
+    # Example: /home/yourcpaneluser/public_html or a subdirectory inside public_html.
+    - export DEPLOYPATH=/home/yourcpaneluser/public_html
+    - /bin/rsync -av --delete --exclude='.git' --exclude='.cpanel.yml' ./ $DEPLOYPATH
