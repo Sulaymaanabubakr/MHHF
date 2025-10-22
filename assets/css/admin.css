@@ -648,3 +648,56 @@
     justify-content: flex-start;
   }
 }
+
+@media (max-width: 480px) {
+  .admin-card {
+    padding: 1.25rem;
+  }
+}
+
+/* === Centre the edit modal in the viewport === */
+.admin-modal__dialog {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  margin: 0 !important;
+  max-width: 520px !important;
+  width: 90% !important;
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 50px rgba(20, 51, 94, 0.15);
+  padding: 2rem;
+}
+
+/* --- Make edit modal scrollable on small screens --- */
+.admin-modal__dialog {
+  position: relative;
+  max-width: 520px;
+  width: 90%;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 50px rgba(20, 51, 94, 0.15);
+  padding: 1.5rem;
+  overflow-y: auto;             /* enables internal scrolling */
+  max-height: 90vh;             /* keeps it within screen height */
+  box-sizing: border-box;
+}
+
+/* centre it vertically with space above/below */
+.admin-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* smoother mobile layout */
+@media (max-width: 480px) {
+  .admin-modal__dialog {
+    width: 95%;
+    padding: 1.25rem;
+    max-height: 85vh; /* slightly smaller for mobile bars */
+  }
+}
