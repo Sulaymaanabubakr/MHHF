@@ -387,7 +387,8 @@ function closeEditModal() {
 
 if (editModal) {
   editModal.addEventListener('click', (event) => {
-    if (event.target === editModal || event.target.matches('[data-admin-modal-close]')) {
+    const trigger = event.target.closest('[data-admin-modal-close]');
+    if (event.target === editModal || trigger) {
       closeEditModal();
     }
   });
