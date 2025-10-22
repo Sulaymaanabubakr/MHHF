@@ -156,3 +156,49 @@ donationButtons.forEach((button) => {
     }, 1800);
   });
 });
+
+
+const donationNotice = (() => {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'donation-notice';
+  wrapper.setAttribute('hidden', '');
+  wrapper.innerHTML = `
+    <div class="donation-notice__dialog">
+      <button type="button" class="donation-notice__close" aria-label="Close">&times;</button>
+      <div class="donation-notice__title" data-notice-title></div>
+      <div class="donation-notice__body" data-notice-body></div>
+      <div class="donation-notice__actions">
+        <button type="button" class="btn btn--primary" data-notice-retry hidden>🔁 Try Again</button>
+        <button type="button" class="btn btn--outline" data-notice-home hidden>🏠 Return Home</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(wrapper);
+  return wrapper;
+})();
+
+function showDonationNotification({ variant, title, message, showRetry = false }) {
+  const dialog = donationNotice.querySelector('.donation-notice__dialog');
+  const titleEl = donationNotice.querySelector('[data-notice-title]');
+  const bodyEl = donationNotice.querySelector('[data-notice-body]');
+  const retryBtn = donationNotice.querySelector('[data-notice-retry]');
+  const homeBtn = donationNotice.querySelector('[data-notice-home]');
+
+  dialog.classList.toggle('donation-notice__dialog--success', variant === 'success');
+  dialog.classList.toggle('donation-notice__dialog--error', variant === 'error');
+
+  titleEl.textContent = title;
+  bodyEl.innerHTML = message;
+  retryBtn.hidden = !showRetry;
+  homeBtn.hidden = false;
+
+  const closeNotice = () => donationNotice.setAttribute('hidden', '');
+  donationNotice.querySelector('.donation-notice__close').onclick = closeNotice;
+  retryBtn.onclick = closeNotice;
+  homeBtn.onclick = () => {
+    closeNotice();
+    window.location.href = 'index.html';
+  };
+
+  donationNotice.removeAttribute('hidden');
+}
