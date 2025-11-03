@@ -1,11 +1,15 @@
 ---
 deployment:
   tasks:
-    # 1️⃣ Set your live website folder path (MHHF)
+    # 1️⃣ Set your LIVE website folder path
     - export DEPLOYPATH=/home2/yustamco/public_html/muslimshelpinghumanity.org.ng/
 
-    # 2️⃣ Sync the repo contents to the live folder
+    # 2️⃣ Sync files from your Git repo (git.muslimshelpinghumanity.org.ng) to the live folder
     - /bin/rsync -av --delete \
         --exclude='.git' \
         --exclude='.cpanel.yml' \
         ./ $DEPLOYPATH
+
+    # 3️⃣ (Optional but recommended) Fix permissions
+    - /bin/find $DEPLOYPATH -type d -exec chmod 755 {} \;
+    - /bin/find $DEPLOYPATH -type f -exec chmod 644 {} \;
