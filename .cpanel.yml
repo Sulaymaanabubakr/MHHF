@@ -4,12 +4,9 @@ deployment:
     # 1️⃣ Set your LIVE website folder path
     - export DEPLOYPATH=/home2/yustamco/public_html/muslimshelpinghumanity.org.ng/
 
-    # 2️⃣ Sync files from your Git repo (git.muslimshelpinghumanity.org.ng) to the live folder
-    - /bin/rsync -av --delete \
-        --exclude='.git' \
-        --exclude='.cpanel.yml' \
-        ./ $DEPLOYPATH
+    # 2️⃣ Copy files to the live site (safe alternative to rsync)
+    - /bin/cp -R ./* $DEPLOYPATH
 
-    # 3️⃣ (Optional but recommended) Fix permissions
+    # 3️⃣ Fix permissions
     - /bin/find $DEPLOYPATH -type d -exec chmod 755 {} \;
     - /bin/find $DEPLOYPATH -type f -exec chmod 644 {} \;
