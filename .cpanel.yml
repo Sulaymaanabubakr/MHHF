@@ -1,5 +1,11 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home2/yustamco/public_html
-    - /bin/rsync -av --delete --exclude='.git' --exclude='.cpanel.yml' ./ $DEPLOYPATH
+    # 1️⃣ Set your live website folder path (MHHF)
+    - export DEPLOYPATH=/home2/yustamco/public_html/muslimshelpinghumanity.org.ng/
+
+    # 2️⃣ Sync the repo contents to the live folder
+    - /bin/rsync -av --delete \
+        --exclude='.git' \
+        --exclude='.cpanel.yml' \
+        ./ $DEPLOYPATH
