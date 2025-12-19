@@ -364,5 +364,27 @@
 
     <script src="https://js.paystack.co/v1/inline.js"></script>
     <script src="assets/js/main.js"></script>
+    <script>
+      // Animation for founders section and cards
+      document.addEventListener('DOMContentLoaded', function() {
+        function animateFounders() {
+          var section = document.querySelector('.founders-section');
+          var cards = document.querySelectorAll('.founder-card');
+          if (!section) return;
+          var rect = section.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 100) {
+            section.classList.add('animated');
+            cards.forEach(function(card, i) {
+              setTimeout(function() {
+                card.classList.add('animated');
+              }, i * 120);
+            });
+            window.removeEventListener('scroll', animateFounders);
+          }
+        }
+        window.addEventListener('scroll', animateFounders);
+        animateFounders();
+      });
+    </script>
   </body>
 </html>
