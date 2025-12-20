@@ -1,3 +1,18 @@
+@media (max-width: 600px) {
+  .founders-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .about-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  .about-card {
+    display: grid !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+  }
+}
 :root {
   --primary-blue: #1d4e89;
   --deep-blue: #14335e;
@@ -450,11 +465,15 @@ header {
   border-radius: var(--radius-lg);
   box-shadow: 0 18px 45px rgba(20, 51, 94, 0.08);
   padding: 2rem 1.75rem;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   gap: 1.1rem;
   text-align: center;
   position: relative;
   overflow: hidden;
+  min-height: 420px;
 }
 
 .founder-card::after {
@@ -526,6 +545,10 @@ header {
   color: rgba(29, 78, 137, 0.75);
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+/* Only the first founder card's title gets a smaller font size */
+.founders-grid .founder-card:first-child .founder-role {
+  font-size: 0.8rem;
 }
 
 .founder-bio {
