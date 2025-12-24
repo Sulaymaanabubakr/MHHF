@@ -12,6 +12,8 @@
     width: 100% !important;
     margin: 0 auto !important;
   }
+
+  /* Animation will work on mobile if JS runs. Fallback handled by JS. */
 }
 :root {
   --primary-blue: #1d4e89;
