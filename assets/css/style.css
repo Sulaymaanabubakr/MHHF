@@ -1,3 +1,9 @@
+/* Make footer brand text white for visibility */
+.footer__brand .footer__brand-text,
+.footer__brand .footer__brand-text *,
+.footer__brand .footer__brand-text span {
+  color: #fff !important;
+}
 @media (max-width: 600px) {
   .founders-grid {
     grid-template-columns: repeat(2, 1fr);

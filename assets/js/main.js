@@ -24,6 +24,17 @@ if (navToggle && navLinks) {
       navToggle.classList.remove('active');
     });
   });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (event) => {
+    const isMenuOpen = navLinks.classList.contains('open');
+    if (!isMenuOpen) return;
+    // If click is outside navLinks and navToggle
+    if (!navLinks.contains(event.target) && !navToggle.contains(event.target)) {
+      navLinks.classList.remove('open');
+      navToggle.classList.remove('active');
+    }
+  });
 }
 
 // =======================
